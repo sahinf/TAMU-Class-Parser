@@ -1,7 +1,8 @@
 # TAMU Class Parser
 A quick python script for parsing specifically the .json file that loads Howdy Portal's classes.
 
-
+# Instructions
+1. Go to Howdy and search for the class/class range that would like to parse
 ![Class Search](/images/classes.png)
 
 2. Open up the inspect element
