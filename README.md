@@ -22,3 +22,4 @@ The instructions acquire the .json file through Firefox but any browser should w
 
 ![Json file](/images/json.png)
 
+6. Right-click and save the page as "searchResults". the type should be .json
