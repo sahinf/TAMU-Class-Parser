@@ -17,4 +17,4 @@ A quick python script for parsing specifically the .json file that loads Howdy P
 
 ![Json file](/images/json.png)
 
-6. Right-click and save the page as "searchResults". the type should be '.json'. the full file name.type should be "searchResults.json"
+6. Right-click and save the page as "searchResults". The type should be '.json'. the full file name.type should be "searchResults.json"
