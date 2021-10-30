@@ -1,4 +1,41 @@
 # Function to fill days for LEC, LAB, etc...
+
+# Convert TAMU time "0935" to normal time
+def convert_time(time)-> str:
+    # 0800
+    hours = (int)(time[0:2])
+    meridiem = "A.M." if hours < 12 else "P.M."
+    if (hours == 0): # convert "00:30" to "12:30"
+        hours = 12
+    elif (hours > 12): # convert "13:30" to "1:30"
+        hours -= 12
+    
+
+    minutes = (int)(time[2:4])
+    if minutes < 10:
+        return f'{hours}:0{minutes} {meridiem}'
+
+    return f'{hours}:{minutes} {meridiem}'
+
+# Add time of lec/lab
+def add_time(x):
+    time = ""
+    # Begin time
+    if x['beginTime']:
+        time += convert_time(x["beginTime"])
+    else:
+        time += "N/A B"
+    
+    time += ','
+
+    # End time
+    if x['endTime']:
+        time += convert_time(x["endTime"])
+    else:
+        time += "N/A E"
+
+    return time
+
 # 'x' is the json object 'meetingTime'
 def add_days(x):
     days = ""
@@ -32,14 +69,22 @@ def add_days(x):
     if noDaysProvided:
         days += "N/A"
     
-    # Separate days from time for .csv
-    days += ","
+    # Begin column
+    # days += ','
+    # if x['beginTime']:
+    #     days += x["beginTime"]
+    # else:
+    #     days += "N/A"
     
-    if x['beginTime']:
-        days += x["beginTime"] + " - " + x["endTime"]
-    else:
-        days += "N/A"
+    # # End time column
+    # days += ','
+    # if x['endTime']:
+    #     days += ""
+    # else:
+    #     days += "N/A"
+
     return days
+
 
 
 # Quick function to add lab days and times
@@ -49,12 +94,12 @@ def add_lab(meetingsFaculty):
     # search through all "meetingTimes" to find type "LAB"
     for facultyObject in meetingsFaculty: 
         x = facultyObject["meetingTime"]
-        if x["meetingType"] == "LAB":
-            val += add_days(x)
+        if x["meetingType"] == "LAB": # Only add labs
+            val += add_days(x) + ',' + add_time(x)
             return val
     
     # This course has no LAB so n/a for DAYS, TIMES
-    val += "N/A,N/A"
+    val += "N/A,N/A,N/A"
     return val
 
 

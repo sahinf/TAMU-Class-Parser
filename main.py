@@ -14,16 +14,18 @@ dataDict = jsonDict['data']
 outputFile = open("ClassEnrollment.csv", "w")
 
 # Begin by writing to the output .csv file the HEADERS
-outputFile.write("Course ID,Sec,Lab Days,Lab Time,Cap,Size,Rem,Instructor,Lab Room\n" )
+# outputFile.write("Course ID,Sec,Lab Days,Lab Time,Cap,Size,Rem,Instructor,Lab Room\n" )
+outputFile.write("Course ID,Sec,Lab Days,Begin,End,Cap,Size,Instructor,Lab Room\n" )
 
 for classes in dataDict:
     lineCSV = ",".join([ classes["courseNumber"]
                         ,classes["sequenceNumber"]
-                        ,add_lab(classes["meetingsFaculty"])
+                        
+                        ,add_lab(classes["meetingsFaculty"]) # this adds lab days and lab time
 #                         ,add_lec(classes["meetingsFaculty"])
                         ,str(classes["maximumEnrollment"])
                         ,str(classes["enrollment"])
-                        ,str(classes["seatsAvailable"])
+                        # ,str(classes["seatsAvailable"]) # do not inlcude "Remaining" tab
                         ,add_prof(classes["faculty"])
                         ,add_room(classes["meetingsFaculty"])
                        ])
